@@ -10,20 +10,15 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
     //Let's make the folder and the file to save our ratios
     //                                         0                                1                                   2
     char periodss [6][200];
-    //sprintf(periodss [0],"%s_mass",name_datafile[0]);
     sprintf(periodss [0],"%s_mass_up",name_datafile[0]);
     sprintf(periodss [1],"%s_mass_down",name_datafile[0]);
     sprintf(periodss [2],"%s_positive",name_datafile[0]);
-    sprintf(periodss [3],"%s_negative",name_datafile[0]); //= {Form("%s_mass",name_datafile[0]),Form("%s_positive",name_datafile[0]),Form("%s_negative",name_datafile[0])};
+    sprintf(periodss [3],"%s_negative",name_datafile[0]);
     TFile *periods;
-    //if(naam==1){periods = new TFile(Form("relative/%s.root",periodss[0]),"RECREATE");}
     if(naam==1){periods = new TFile(Form("relative/%s.root",periodss[0]),"RECREATE");}
     if(naam==2){periods = new TFile(Form("relative/%s.root",periodss[1]),"RECREATE");}
     if(naam==3){periods = new TFile(Form("relative/%s.root",periodss[2]),"RECREATE");}
     if(naam==4){periods = new TFile(Form("relative/%s.root",periodss[3]),"RECREATE");}
-    //if(period==1 && naam==1){periods[period] = new TFile(Form("relative/period%s.root",periodss[1]),"RECREATE");}
-    //if(period==1 && naam==2){periods[period] = new TFile(Form("relative/period%s.root",periodss[3]),"RECREATE");}
-    //if(period==1 && naam==3){periods[period] = new TFile(Form("relative/period%s.root",periodss[5]),"RECREATE");}
 
     cout<<"-----------------------------------------------------------------"<<endl;
     cout<<"I am in the ratios. Trying to calculate the relative SF errors..."<<endl;
@@ -81,15 +76,10 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
 
     for (int trig=0;trig<ntrig;++trig)
     	{
-        	//canvas[trig]= new TCanvas(Form("canvas_%d",trig),Form("canvas_%d",trig),800,600);//Returns the trig numbers
- 	    	//canvas[trig]->cd();
 
         	ratio[trig] = (TGraphAsymmErrors*)ratios[0][trig]->Clone(Form("ratio_%d",trig));
 
-        	double x1;
-    		double y1;
-    		double x2;
-    		double y2;
+        	double x1,x2,y1,y2;
 
         	for(int n=0; n<ratio[trig]->GetN();n++)
            		{
@@ -114,51 +104,10 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
             	}//end for eta
 
 
-/*
-    		ratio[trig]->SetLineColor(kBlack);
- 			ratio[trig]->SetMarkerStyle(20);
- 			ratio[trig]->SetMarkerColor(kBlack);
- 			ratio[trig]->SetTitle(";#eta;Relative uncertaintity");
-   			ratio[trig]->Draw("ap");
-*/
     		fit[trig] = new TF1(Form("fit_%d",trig),"[0]",-2.5,2.5);
     		fit[trig]->SetParameter(0,1.);
     		fit[trig]->Print();
     		ratio[trig]->Fit(fit[trig],"s","",-2.5,2.5)->Print();
-    		//fit[trig]->Draw("same");
-/*
-			leg1[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg1[trig]->SetBorderSize(0);
-			leg1[trig]->SetFillStyle(0);
-			leg1[trig]->SetTextSize(0.04);
-			leg1[trig]->SetTextFont(42);
-			leg1[trig]->AddEntry(ratio[trig],  Form("%s",fnames[trig]),"pl");
-			leg1[trig]->Draw();
-
-
-			canvasnew[trig]= new TCanvas(Form("canvasnew_%d",trig),Form("canvasnew_%d",trig),800,600);//Returns the trig numbers
- 			canvasnew[trig]->cd();
-
-
-    		ratios[0][trig]->SetMarkerColor(kBlue);
-    		ratios[0][trig]->SetLineColor(kBlue);
-    		ratios[0][trig]->SetTitle(";#eta;SF");
-			ratios[0][trig]->Draw("ap0");
-
-			ratios[1][trig]->SetMarkerColor(kRed);
-			ratios[1][trig]->SetLineColor(kRed);
-			ratios[1][trig]->Draw("p same");
-
-
-			leg2[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg2[trig]->SetBorderSize(0);
-			leg2[trig]->SetFillStyle(0);
-			leg2[trig]->SetTextSize(0.04);
-			leg2[trig]->SetTextFont(42);
-			leg2[trig]->AddEntry(ratios[0][trig],  Form("%s nominal",fnames[trig]),"pl");
-			leg2[trig]->AddEntry(ratios[1][trig],  Form("%s #mu negat",fnames[trig]),"pl");
-			leg2[trig]->Draw();
-*/
 
     		ratio[trig]->Write();
    		}//end of trigger loop
@@ -169,14 +118,7 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
             ratio1[trig] = (TGraphAsymmErrors*)ratiosphibar[0][trig]->Clone(Form("ratiobar_%d",trig));
             ratio2[trig] = (TGraphAsymmErrors*)ratiosphiend[0][trig]->Clone(Form("ratioend_%d",trig));
 
-            double x1;//for phi barrel
-    	    double y1;
-            double x2;
-    	    double y2;
-            double xx1;//for phi endcap
-    	    double yy1;
-    	    double xx2;
-    	    double yy2;
+            double x1,y1,x2,y2,xx1,yy1,xx2,yy2;
 
     		for(int n=0; n<ratio1[trig]->GetN();n++)
           		 {
@@ -201,54 +143,12 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
             	}//end for phi bar
 
 
-/*
-    		ratio1[trig]->SetLineColor(kBlack);
- 			ratio1[trig]->SetMarkerStyle(20);
- 			ratio1[trig]->SetMarkerColor(kBlack);
- 			ratio1[trig]->SetTitle(";#phi;Relative uncertaintity");
-    		ratio1[trig]->Draw("ap");
-*/
-
 
     		fit1[trig] = new TF1(Form("fit1_%d",trig),"[0]",-2.945243,3.337942);
     		fit1[trig]->SetParameter(0,1.);
     		fit1[trig]->Print();
     		ratio1[trig]->Fit(fit1[trig],"s","",-2.945243,3.337942)->Print();
-    		//fit1[trig]->Draw("same");
 
-/*
-			leg11[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg11[trig]->SetBorderSize(0);
-			leg11[trig]->SetFillStyle(0);
-			leg11[trig]->SetTextSize(0.04);
-			leg11[trig]->SetTextFont(42);
-			leg11[trig]->AddEntry(ratio[trig],  Form("%s",fnames[trig]),"pl");
-			leg11[trig]->Draw();
-
-
-			canvasnew[trig]= new TCanvas(Form("canvasnew_%d",trig),Form("canvasnew_%d",trig),800,600);//Returns the trig numbers
- 			canvasnew[trig]->cd();
-
-
-    		ratios[0][trig]->SetMarkerColor(kBlue);
-    		ratios[0][trig]->SetLineColor(kBlue);
-    		ratios[0][trig]->SetTitle(";#phi;SF");
-			ratios[0][trig]->Draw("ap0");
-
-			ratios[1][trig]->SetMarkerColor(kRed);
-			ratios[1][trig]->SetLineColor(kRed);
-			ratios[1][trig]->Draw("p same");
-
-
-			leg2[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg2[trig]->SetBorderSize(0);
-			leg2[trig]->SetFillStyle(0);
-			leg2[trig]->SetTextSize(0.04);
-			leg2[trig]->SetTextFont(42);
-			leg2[trig]->AddEntry(ratios[0][trig],  Form("%s nominal",fnames[trig]),"pl");
-			leg2[trig]->AddEntry(ratios[1][trig],  Form("%s #Syst",fnames[trig]),"pl");
-			leg2[trig]->Draw();
-*/
         	ratio1[trig]->Write();
 
 
@@ -257,11 +157,6 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
         	//FOR THE ENDCAP//////////////////////////////////////////////////////////////////////
         	///================================================================================///
         	///================================================================================///
-/*
-        	canvass[trig]= new TCanvas(Form("canvass_%d",trig),Form("canvass_%d",trig),800,600);//Returns the trig numbers
- 	    	canvass[trig]->cd();
-*/
-
 
         	for(int n=0; n<ratio2[trig]->GetN();n++)
            		{
@@ -287,54 +182,11 @@ void ratiosf(TFile *normal, TFile *systematic, int naam)
             	}//end for phi end
 
 
-/*
-    		ratioo[trig]->SetLineColor(kBlack);
- 			ratioo[trig]->SetMarkerStyle(20);
- 			ratioo[trig]->SetMarkerColor(kBlack);
- 			ratioo[trig]->SetTitle(";#phi;Relative uncertaintity");
-    		ratioo[trig]->Draw("ap");
-*/
 
     		fit2[trig] = new TF1(Form("fit2_%d",trig),"[0]",-3.403392,2.879793);
     		fit2[trig]->SetParameter(0,1.);
     		fit2[trig]->Print();
     		ratio2[trig]->Fit(fit2[trig],"s","",-3.403392,2.879793)->Print();
-    		//fit2[trig]->Draw("same");
-
-/*
-			leg11[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg11[trig]->SetBorderSize(0);
-			leg11[trig]->SetFillStyle(0);
-			leg11[trig]->SetTextSize(0.04);
-			leg11[trig]->SetTextFont(42);
-			leg11[trig]->AddEntry(ratioo[trig],  Form("%s",fnames[trig]),"pl");
-			leg11[trig]->Draw();
-
-
-
-			canvasneww[trig]= new TCanvas(Form("canvasneww_%d",trig),Form("canvasneww_%d",trig),800,600);//Returns the trig numbers
- 			canvasneww[trig]->cd();
-
-
-    		ratioss[0][trig]->SetMarkerColor(kBlue);
-    		ratioss[0][trig]->SetLineColor(kBlue);
-    		ratioss[0][trig]->SetTitle(";#phi_{end};SF");
-			ratioss[0][trig]->Draw("ap0");
-
-			ratioss[1][trig]->SetMarkerColor(kRed);
-			ratioss[1][trig]->SetLineColor(kRed);
-			ratioss[1][trig]->Draw("p same");
-
-
-			leg22[trig] = new TLegend(0.6,0.65,0.9,0.9);
-			leg22[trig]->SetBorderSize(0);
-			leg22[trig]->SetFillStyle(0);
-			leg22[trig]->SetTextSize(0.04);
-			leg22[trig]->SetTextFont(42);
-			leg22[trig]->AddEntry(ratioss[0][trig],  Form("%s nominal",fnames[trig]),"pl");
-			leg22[trig]->AddEntry(ratioss[1][trig],  Form("%s #Syst",fnames[trig]),"pl");
-			leg22[trig]->Draw();
-*/
         	ratio2[trig]->Write();
 
 

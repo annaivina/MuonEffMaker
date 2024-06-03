@@ -1,11 +1,9 @@
 #include <TH2.h>
 #include <TStyle.h>
 
-
 #include<cmath>
 #include<cassert>
 #include<iostream>
-
 
 #include"TFile.h"
 #include"TH1.h"
@@ -34,8 +32,6 @@
 #include "AtlasLabels.C"
 #include "AtlasStyle.C"
 #include "TGraph.h"
-
-
 
 //functions
 #include "probe.cxx"

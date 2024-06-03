@@ -1,8 +1,6 @@
 #include<cmath>
 #include<cassert>
 #include<iostream>
-
-
 #include"TFile.h"
 #include"TH2.h"
 #include"TCanvas.h"
@@ -96,7 +94,6 @@ void plot()
  	mass_up->SetMarkerStyle(20);
  	mass_up->SetMarkerColor(kBlack);
  	mass_up->SetTitle(";#eta;Default/Changed");
- 	//mass_rel->GetYaxis()->SetRangeUser(0.,0.05);
     mass_up->Draw();
 
 

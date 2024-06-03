@@ -15,23 +15,15 @@ void probe(TFile *file, int iscut, int name)//will open the file you have specif
   int const nptbins=11;
   double  binspt[nptbins]={4.,7.2,10.5,15.5,19.0,25.0,30.0,35.0,40.0,50.0,80.0};
 
-
   //ETA bins
    int const netabins=29; //All together
   double binseta[netabins]={-2.5,-2.4,-1.918,-1.623,-1.348,-1.2329,-1.1479,-1.05,-0.908,-0.791,-0.652,-0.476,-0.324,
                             -0.132,0.0,+0.132,+0.324,+0.476,+0.652,+0.791,+0.908,+1.05,+1.1479,+1.2329,+1.348,+1.623,+1.918,+2.4,+2.5};
 
-
+  //Systematic bins for ETA
   int const netabinss=10; //for systematic
   double binsetas[netabinss]={-2.5,-1.918,-1.2329,-0.908,-0.324,+0.324,+0.908,+1.2329,+1.918,+2.5};
 
-  //int const netabinss=10; //for systematic
-  //double binsetas[netabinss]={-2.5,-1.918,-1.2329,-0.908,-0.476,+0.476,+0.908,+1.2329,+1.918,+2.5};
-  // int const netabinss=10; //for systematic
-  //double binsetas[netabinss]={-2.5,-1.918,-1.623,-0.908,-0.476,+0.476,+0.908,+1.623,+1.918,+2.5};
-
-
-  //ETA-PHI map bins
   //Eta and phi for the eta-phi distribution
   int const nbinsetabar=15;
   double etabinsbar[nbinsetabar]={-1.05,-0.908,-0.791,-0.652,-0.476,-0.324,-0.132,0.0,+0.132,+0.324,+0.476,+0.652,+0.791,+0.908,+1.05};
@@ -39,15 +31,7 @@ void probe(TFile *file, int iscut, int name)//will open the file you have specif
   int const nbinsetaend=16;
   double etabinsend[nbinsetaend]={-2.5,-2.4,-1.918,-1.623,-1.348,-1.2329,-1.1479,-1.05,+1.05,+1.1479,+1.2329,+1.348,+1.623,+1.918,+2.4,+2.5};
 
-/*
-  //Lets define what we need
-  bool is_default  = (iscut==0);
-  bool is_mass     = (iscut==1);
-  bool is_positive = (iscut==2);
-  bool is_negative = (iscut==3);
-  bool is_newbin   = (iscut==4);
-*/
-   //Lets define what we need
+  //Define systematics
   bool is_default       = (iscut==0);
   bool is_mass_up       = (iscut==1);
   bool is_mass_down     = (iscut==2);
@@ -82,7 +66,6 @@ void probe(TFile *file, int iscut, int name)//will open the file you have specif
   TH1D *probephiendmu15_MU10;
   TH1D *probephiendmu15_MU6;
 
-
   TH1D *probeptbar;
   TH1D *probeptend;
   TH1D *probeptbarmu15;
@@ -93,18 +76,6 @@ void probe(TFile *file, int iscut, int name)//will open the file you have specif
   TH1D *probeptendmu15_MU10;
   TH1D *probeptendmu15_MU6;
 
-/*
-  TFile *out_default;
-  if(is_default){out_default = new TFile(Form("%s/default.root",folders[name]),"RECREATE");}
-  TFile *out_sys1;
-  if(is_mass){out_sys1 = new TFile(Form("%s/mass.root",folders[name]),"RECREATE");}
-  TFile *out_sys2;
-  if(is_positive){out_sys2 = new TFile(Form("%s/positive.root",folders[name]),"RECREATE");}
-  TFile *out_sys3;
-  if(is_negative){out_sys3 = new TFile(Form("%s/negative.root",folders[name]),"RECREATE");}
-  TFile *out_newbin;
-  if(is_newbin){out_newbin = new TFile(Form("%s/newbin.root",folders[name]),"RECREATE");}
-*/
 
   TFile *out_default;
   if(is_default){out_default = new TFile(Form("%s/default.root",folders[name]),"RECREATE");}
@@ -229,83 +200,8 @@ void probe(TFile *file, int iscut, int name)//will open the file you have specif
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
- /*
-  //Number of vertices ALL - BARREL
-  TH1D *probeverbartcut8=new TH1D("probeverbartcut8","probevertcut8",9,1.5,10.5);
-  TH1D *probeverbartcut15=new TH1D("probeverbartcut15","probevertcut155",9,1.5,10.5);
-  TH1D *probeverbartcut15_MU10=new TH1D("probeverbartcut15_MU10","probevertcut15_MU10",9,1.5,10.5);
-  TH1D *probeverbartcut15_MU6=new TH1D("probeverbartcut15_MU6","probevertcut15_MU6",9,1.5,10.5);
-  TH1D *probeverbartcut10MU6=new TH1D("probeverbartcut10MU6","probevertcut10MU6",9,1.5,10.5);
 
-
-   //Number of vertices matched to the ntrigger - BARREL
-
-  TH1D *probeverbartmu8=new TH1D("probeverbartmu8","probevertmu80",9,1.5,10.5);
-  TH1D *probeverbartmu15=new TH1D("probeverbartmu15","probevertmu15",9,1.5,10.5);
-  TH1D *probeverbartmu15_MU10=new TH1D("probeverbartmu15_MU10","probevertmu15_MU10",9,1.5,10.5);
-  TH1D *probeverbartmu15_MU6=new TH1D("probeverbartmu15_MU6","probevertmu15_MU6",9,1.5,10.5);
-  TH1D *probeverbartmu10MU6=new TH1D("probeverbartmu10MU6","probevertmu10MU6",9,1.5,10.5);
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-   //Number of vertices ALL - ENDCAP
-  TH1D *probeverendtcut8=new TH1D("probeverendtcut8","probevertcut8",9,1.5,10.5);
-  TH1D *probeverendtcut15=new TH1D("probeverendtcut15","probevertcut155",9,1.5,10.5);
-  TH1D *probeverendtcut15_MU10=new TH1D("probeverendtcut15_MU10","probevertcut15_MU10",9,1.5,10.5);
-  TH1D *probeverendtcut15_MU6=new TH1D("probeverendtcut15_MU6","probevertcut15_MU6",9,1.5,10.5);
-  TH1D *probeverendtcut10MU6=new TH1D("probeverendtcut10MU6","probevertcut10MU6",9,1.5,10.5);
-
-
-   //Number of vertices matched to the ntrigger - ENDCAP
-
-  TH1D *probeverendtmu8=new TH1D("probeverendtmu8","probevertmu80",9,1.5,10.5);
-  TH1D *probeverendtmu15=new TH1D("probeverendtmu15","probevertmu15",9,1.5,10.5);
-  TH1D *probeverendtmu15_MU10=new TH1D("probeverendtmu15_MU10","probevertmu15_MU10",9,1.5,10.5);
-  TH1D *probeverendtmu15_MU6=new TH1D("probeverendtmu15_MU6","probevertmu15_MU6",9,1.5,10.5);
-  TH1D *probeverendtmu10MU6=new TH1D("probeverendtmu10MU6","probevertmu10MU6",9,1.5,10.5);
-*/
-
-
-
-/*
-   /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //ETA PHI map:////////////////////////////////////////////////////////////////////////////////////////////
-  //BARRELL
-
-  TH2D *etaphibar15 = new TH2D("etaphibar15","Eta-phi probe mu",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibar15_MU10 = new TH2D("etaphibar15_MU10","Eta-phi probe mu",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibar15_MU6  = new TH2D("etaphibar15_MU6","Eta-phi probe mu",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-
-
-
-  //ENDCAUP
-  TH2D *etaphiend8  = new TH2D("etaphiend8", "Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  //TH2D *etaphiend10 = new TH2D("etaphiend10","Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiend15 = new TH2D("etaphiend15","Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiend15_MU10 = new TH2D("etaphiend15_MU10","Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiend15_MU6  = new TH2D("etaphiend15_MU6","Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiend10MU6  = new TH2D("etaphiend10MU6","Eta-phi probe mu",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-
-  //BARREL triggers
-  TH2D *etaphibarmu8  = new TH2D("etaphibarmu8","Eta-phi probe mu8",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  //TH2D *etaphibarmu10 = new TH2D("etaphibarmu10","Eta-phi probe mu10",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibarmu15 = new TH2D("etaphibarmu15","Eta-phi probe mu15",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibarmu15_MU10 = new TH2D("etaphibarmu15_MU10","Eta-phi probe mu15",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibarmu15_MU6  = new TH2D("etaphibarmu15_MU6","Eta-phi probe mu15",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-  TH2D *etaphibarmu10MU6  = new TH2D("etaphibarmu10MU6","Eta-phi probe mu15",nbinsetabar-1,etabinsbar,8,-3.14,3.14);
-
-
-  //ENDCAP triggers
-  TH2D *etaphiendmu8  = new TH2D("etaphiendmu8", "Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  //TH2D *etaphiendmu10 = new TH2D("etaphiendmu10","Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiendmu15 = new TH2D("etaphiendmu15","Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiendmu15_MU10 = new TH2D("etaphiendmu15_MU10","Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiendmu15_MU6  = new TH2D("etaphiendmu15_MU6","Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  TH2D *etaphiendmu10MU6  = new TH2D("etaphiendmu10MU6","Eta-phi probe mu8",nbinsetaend-1,etabinsend,12,-3.14,3.14);
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
-
-  //define the parameters
+  //Define the cuts
   //const int ntrig = 3;
   //char triggers [ntrig][200]= {"mu15","mu15_MU10","mu15_MU6"};
   //eta~~~~~~~~~~~~

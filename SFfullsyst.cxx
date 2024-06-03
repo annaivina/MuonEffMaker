@@ -312,10 +312,7 @@ TGraphAsymmErrors *effptend[datamc][ntrig];
          }
 
 	int lookhere[28]={0,0,1,1,1,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,7,7,7,8,8};   //-->search for each bin in the new bin with bigger binning..
-    //int lookhere[28]={0,0,1,1,1,2,2,2,3,3,3,4,4,4,4,4,4,5,5,5,6,6,6,7,7,7,8,8};
-    //int lookhere[28]={0,0,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,8,8};
-    //int lookhere[28]={0,0,1,2,2,2,2,2,3,3,3,4,4,4,4,4,4,5,5,5,6,6,6,6,6,7,8,8};
-    //Loop over the bins
+     //Loop over the bins
     double xxx1,yyy1;
     for(int n=0;n<SFTot[trig]->GetN();n++)
         {
@@ -372,7 +369,7 @@ cout<<"=============================================="<<endl;
 //===========================================END of ETA================================//
 
 
-/*
+
  ////////////////////////////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////PT    efficiency////////////////////////////////////////////////////
@@ -663,9 +660,9 @@ for(int trig=0;trig<ntrig;++trig)
   //  ntuple->Write();
 }
 
-*/
 
-/*
+
+
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
  //EFFICIENCY FOR PHI
@@ -1079,250 +1076,6 @@ for(int trig=0;trig<ntrig;++trig)
     //SFphiend[trig]->Write();
     //ntuple->Write();
 }
-
-*/
-/*
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//ETA-PHI MAP/////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-//DENuMERATOR
-//mu8
- TH2D *etaphibarm8    =(TH2D*)file  ->Get("etaphibar8");
- TH2D *etaphibarm8MC  =(TH2D*)file1 ->Get("etaphibar8");
-
- //mu15
- TH2D *etaphibarm15   =(TH2D*)file  ->Get("etaphibar15");
- TH2D *etaphibarm15MC =(TH2D*)file1 ->Get("etaphibar15");
-
-
- //mu15mu10
- TH2D *etaphibarm15MU10   =(TH2D*)file  ->Get("etaphibar15MU10");
- TH2D *etaphibarm15MU10MC =(TH2D*)file1 ->Get("etaphibar15MU10");
-
-
- //mu15mu6
- TH2D *etaphibarm15MU6   =(TH2D*)file  ->Get("etaphibar15MU6");
- TH2D *etaphibarm15MU6MC =(TH2D*)file1 ->Get("etaphibar15MU6");
-
-
- //mu10mu6
- TH2D *etaphibarm10MU6   =(TH2D*)file  ->Get("etaphibar10MU6");
- TH2D *etaphibarm10MU6MC =(TH2D*)file1 ->Get("etaphibar10MU6");
-
-
-
-
- //NUMERATOR
- //mu8
- TH2D *etaphimub8   =(TH2D*)file->Get("etaphibarmu8");
- TH2D *etaphimub8MC =(TH2D*)file1->Get("etaphibarmu8");
-
-
- //mu15
- TH2D *etaphimub15   =(TH2D*)file->Get("etaphibarmu15");
- TH2D *etaphimub15MC =(TH2D*)file1->Get("etaphibarmu15");
-
- //mumu10
- TH2D *etaphimub15MU10   =(TH2D*)file->Get("etaphibarmu15MU10");
- TH2D *etaphimub15MU10MC =(TH2D*)file1->Get("etaphibarmu15MU10");
-
- //mu15mu6
- TH2D *etaphimub15MU6   =(TH2D*)file->Get("etaphibarmu15MU6");
- TH2D *etaphimub15MU6MC =(TH2D*)file1->Get("etaphibarmu15MU6");
-
- //mu10mu6
- TH2D *etaphimub10MU6   =(TH2D*)file->Get("etaphibarmu10MU6");
- TH2D *etaphimub10MU6MC =(TH2D*)file1->Get("etaphibarmu10MU6");
-
-
-
-
-
-  //endcap//////////////////////////////////////////
-  //Denumerator
-  //mu8
- TH2D *etaphiendm8    =(TH2D*)file  ->Get("etaphiend8");
- TH2D *etaphiendm8MC  =(TH2D*)file1 ->Get("etaphiend8");
-
- //mu15
- TH2D *etaphiendm15   =(TH2D*)file  ->Get("etaphiend15");
- TH2D *etaphiendm15MC =(TH2D*)file1 ->Get("etaphiend15");
-
-
- //mu15mu10
- TH2D *etaphiendm15MU10   =(TH2D*)file  ->Get("etaphiend15MU10");
- TH2D *etaphiendm15MU10MC =(TH2D*)file1 ->Get("etaphiend15MU10");
-
-
- TH2D *etaphiendm15MU6   =(TH2D*)file  ->Get("etaphiend15MU6");
- TH2D *etaphiendm15MU6MC =(TH2D*)file1 ->Get("etaphiend15MU6");
-
-
- TH2D *etaphiendm10MU6   =(TH2D*)file  ->Get("etaphiend10MU6");
- TH2D *etaphiendm10MU6MC =(TH2D*)file1 ->Get("etaphiend10MU6");
-
-
-
-
- //Numerator
- //mu8
- TH2D *etaphimue8   =(TH2D*)file ->Get("etaphiendmu8");
- TH2D *etaphimue8MC =(TH2D*)file1->Get("etaphiendmu8");
-
-
- //mu15
- TH2D *etaphimue15  =(TH2D*)file ->Get("etaphiendmu15");
- TH2D *etaphimue15MC=(TH2D*)file1->Get("etaphiendmu15");
-
-
- //mu15mu10
- TH2D *etaphimue15MU10  =(TH2D*)file ->Get("etaphiendmu15MU10");
- TH2D *etaphimue15MU10MC=(TH2D*)file1->Get("etaphiendmu15MU10");
-
-
- //mu15mu6
- TH2D *etaphimue15MU6  =(TH2D*)file ->Get("etaphiendmu15MU6");
- TH2D *etaphimue15MU6MC=(TH2D*)file1->Get("etaphiendmu15MU6");
-
-
- //mu10mu6
- TH2D *etaphimue10MU6  =(TH2D*)file ->Get("etaphiendmu10MU6");
- TH2D *etaphimue10MU6MC=(TH2D*)file1->Get("etaphiendmu10MU6");
-
-
- TH2D *etaphi_end[ratio][datamc][ntrig]= {{{etaphimue8,etaphimue15,etaphimue15MU10,etaphimue15MU6,etaphimue10MU6},{etaphimue8MC,etaphimue15MC,etaphimue15MU10MC,etaphimue15MU6MC,etaphimue10MU6MC}},
-                                         {{etaphiendm8,etaphiendm15,etaphiendm15MU10,etaphiendm15MU6,etaphiendm10MU6},{etaphiendm8MC,etaphiendm15MC,etaphiendm15MU10MC,etaphiendm15MU6MC,etaphiendm10MU6MC}}};
-
- //TH2D *etaphi_bar[ratio][datamc][ntrig]= {{{etaphimub8,etaphimub15,etaphimub15MU10,etaphimub15MU6,etaphimub10MU6},{etaphimub8MC,etaphimub15MC,etaphimub15MU10MC,etaphimub15MU6MC,etaphimub10MU6MC}},
- //                                    {{etaphibarm8,etaphibarm15,etaphibarm15MU10,etaphibarm15MU6,etaphibarm10MU6},{etaphibarm8MC,etaphibarm15MC,etaphibarm15MU10MC,etaphibarm15MU6MC,etaphibarm10MU6MC}}};
-
-
-
-
-
- TH2D *effetaphibar[datamc][ntrig];
- TH2D              *SFetaphibar [ntrig];
- TCanvas           *canvas100[ntrig];
- TPad              *pad100[ntrig];
- TPad              *pad200[ntrig];
- TLegend           *leg200[ntrig];
- TLegend           *legC200[ntrig];
- TLine             *line200[ntrig];
-
-
-
-
-for(int trig=0;trig<ntrig;++trig)
- {
-
-    for(int dm=0; dm<datamc;++dm)
-       {
-         //effetaphibar[dm][trig] = new TGraphAsymmErrors();
-         effetaphibar[dm][trig] = (TH2D*)etaphi_bar[0][dm][trig]->Clone(Form("effetaphibar_%d_%d",trig,dm));
-         effetaphibar[dm][trig]->Divide(etaphi_bar[0][dm][trig],etaphi_bar[1][dm][trig]);
-        }
-
-
- 	canvas100[trig]= new TCanvas(Form("canvas100_%d",trig),Form("canvas100_%d",trig),600,800);//Returns the trig numbers
- 	canvas100[trig]->cd();
-
-
-
-
-
-
-    int const nbinsetabar=15;
-
-    double etabinsbar[nbinsetabar]={-1.05,-0.908,-0.791,-0.652,-0.476,-0.324,-0.132,0.0,+0.132,+0.324,+0.476,+0.652,+0.791,+0.908,+1.05};
-
-
-    SFetaphibar[trig] = (TH2D*)effetaphibar[0][trig]->Clone(Form("SFetaphibar_%d",trig));
-    SFetaphibar[trig]->Divide(effetaphibar[0][trig],effetaphibar[1][trig]);
-    gStyle->SetPaintTextFormat("4.2f");
-    gStyle->SetPalette(kRainBow);
-    SFetaphibar[trig]->GetZaxis()->SetRangeUser(0.,1.2);
-    //SFetaphibar[trig]->SetTitle(";#eta;#phi");
- 	SFetaphibar[trig]->Draw("col text");
-
- 	leg200[trig] = new TLegend(0.5,0.2,0.6,0.4);
-    leg200[trig]->SetBorderSize(0);
- 	leg200[trig]->SetFillStyle(0);
- 	leg200[trig]->SetTextSize(0.04);
-    leg200[trig]->SetTextFont(42);
-    leg200[trig]->AddEntry(SFetaphibar[trig], Form("%s",fnames[trig]),"pl");
- 	leg200[trig]->Draw();
-
-
-
-
-//}
-
-
-
- TH2D              *effetaphiend[datamc][ntrig];
- TH2D              *SFetaphiend [ntrig];
- TCanvas           *canvas200[ntrig];
- TPad              *pad100[ntrig];
- TPad              *pad200[ntrig];
- TLegend           *leg300[ntrig];
- TLegend           *legC200[ntrig];
- TLine             *line200[ntrig];
-
-
-
-
-for(int trig=0;trig<ntrig;++trig)
- {
-
-    for(int dm=0; dm<datamc;++dm)
-       {
-         //effetaphibar[dm][trig] = new TGraphAsymmErrors();
-         effetaphiend[dm][trig] = (TH2D*)etaphi_end[0][dm][trig]->Clone(Form("effetaphiend_%d_%d",trig,dm));
-         effetaphiend[dm][trig]->Divide(etaphi_end[0][dm][trig],etaphi_end[1][dm][trig]);
-        }
-
-
- 	canvas200[trig]= new TCanvas(Form("canvas200_%d",trig),Form("canvas200_%d",trig),1000,800);//Returns the trig numbers
- 	canvas200[trig]->cd();
-
-    canvas200[trig]->SetTopMargin(0.1);
-    canvas200[trig]->SetBottomMargin(0.2);
-    canvas200[trig]->SetLeftMargin(0.1);
-    canvas200[trig]->SetRightMargin(0.1);
-
-    canvas200[trig]->Draw();
-
-
-
-
-
-
-    int const nbinsetaend=16;
-    double etabinsend[nbinsetaend]={-2.5,-2.4,-1.918,-1.623,-1.348,-1.2329,-1.1479,-1.05,+1.05,+1.1479,+1.2329,+1.348,+1.623,+1.918,+2.4,+2.5};
-
-
-    SFetaphiend[trig] = (TH2D*)effetaphiend[0][trig]->Clone(Form("SFetaphiend_%d",trig));
-    SFetaphiend[trig]->Divide(effetaphiend[0][trig],effetaphiend[1][trig]);
-    gStyle->SetPaintTextFormat("4.2f");
-    gStyle->SetPalette(kRainBow);
-    SFetaphiend[trig]->GetZaxis()->SetRangeUser(0.,1.2);
-    SFetaphiend[trig]->SetTitle(";#eta;#phi");
-    SFetaphiend[trig]->GetYaxis()->SetTitleOffset(0.8);
- 	SFetaphiend[trig]->Draw("colz text");
-
- 	leg300[trig] = new TLegend(0.5,0.2,0.6,0.4);
-    leg300[trig]->SetBorderSize(0);
- 	leg300[trig]->SetFillStyle(0);
- 	leg300[trig]->SetTextSize(0.04);
-    leg300[trig]->SetTextFont(42);
-    leg300[trig]->AddEntry(SFetaphiend[trig], Form("%s",fnames[trig]),"pl");
- 	leg300[trig]->Draw();
- }
-*/
 
 
 
